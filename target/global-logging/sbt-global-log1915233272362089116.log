@@ -1,0 +1,22 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 2 Scala sources to /Users/hajiler/school/cs441/CourseProject/target/scala-3.1.0/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: /Users/hajiler/school/cs441/CourseProject/src/main/scala/FileWatcher/DirectoryWatcher.scala:8:30 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m8 |[0m  path.register(watchService, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE)[0m
+[0m[[0m[31merror[0m] [0m[0m  |                              [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |                              Not found: ENTRY_CREATE[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: /Users/hajiler/school/cs441/CourseProject/src/main/scala/FileWatcher/DirectoryWatcher.scala:8:44 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m8 |[0m  path.register(watchService, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE)[0m
+[0m[[0m[31merror[0m] [0m[0m  |                                            [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |                                            Not found: ENTRY_MODIFY[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: /Users/hajiler/school/cs441/CourseProject/src/main/scala/FileWatcher/DirectoryWatcher.scala:8:58 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m8 |[0m  path.register(watchService, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE)[0m
+[0m[[0m[31merror[0m] [0m[0m  |                                                          [31m^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |                                                   Not found: ENTRY_DELETE[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[0mdebug[0m] [0m[0mForcing garbage collection...[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 1 s, completed Nov 21, 2021 2:30:57 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(idea-shell, None, None)[0m

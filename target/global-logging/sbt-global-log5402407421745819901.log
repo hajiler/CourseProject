@@ -1,0 +1,24 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 2 Scala sources to /Users/hajiler/school/cs441/CourseProject/target/scala-2.13/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/ObtainConfigReference.scala:17:29: ';' expected but ':' found.[0m
+[0m[[0m[31merror[0m] [0m[0mobject ObtainConfigReference:[0m
+[0m[[0m[31merror[0m] [0m[0m                            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/ObtainConfigReference.scala:19:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private val logger = LoggerFactory.getLogger(ObtainConfigReference.getClass)[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/ObtainConfigReference.scala:20:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private def ValidateConfig(confEntry: String):Boolean = Try(config.getConfig(confEntry)) match {[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/ObtainConfigReference.scala:25:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  def apply(confEntry:String): Option[Config] = if ValidateConfig(confEntry) then Some(config) else None[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/ObtainConfigReference.scala:27:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  def apply(confEntry:String): Option[Config] = if ValidateConfig(confEntry) then Some(config) else None[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m5 errors found[0m
+[0m[[0m[0mdebug[0m] [0m[0mForcing garbage collection...[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 2 s, completed Nov 30, 2021 10:27:22 AM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(idea-shell, None, None)[0m
