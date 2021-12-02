@@ -7,7 +7,7 @@ import scala.jdk.CollectionConverters.CollectionHasAsScala
 class DirectoryWatcher {
   val watchService : WatchService = FileSystems.getDefault().newWatchService()
   val path : Path = Paths.get("/Users/hajiler/school/cs441/CourseProject")
-  path.register(watchService, ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE)
+  path.register(watchService, ENTRY_CREATE, ENTRY_MODIFY)
   val watchKey : WatchKey = watchService.take()
 
   def startWatch() : List[String] = {
@@ -16,7 +16,7 @@ class DirectoryWatcher {
       val pollEvents = watchKey.pollEvents()
       if (!pollEvents.isEmpty) {
         return pollEvents.asScala
-          .map(event => s"${event.kind()} File: ${event.context()}")
+          .map(event => event.context().toString)
           .toList
       }
     }
