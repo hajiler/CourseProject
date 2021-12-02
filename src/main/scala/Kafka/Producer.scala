@@ -14,7 +14,10 @@ import org.apache.kafka.common.serialization.StringSerializer
 import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.util.{Failure, Success}
 
-object ProducerApp extends App {
+object ProducerApp {
+  val logs = List("16:28:44.370 [scala-execution-context-global-123] WARN  HelperUtils.Parameters$ - x2oBSI0%CdfV2%ChSsnZ7vJo=2qJqZ%.kbc!0ne`y&m",
+    "16:28:44.389 [scala-execution-context-global-123] ERROR HelperUtils.Parameters$ - ihu}!A2]*07}|,lc",
+    "16:28:44.406 [scala-execution-context-global-123] INFO  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?")
   implicit val system: ActorSystem = ActorSystem("producer-sys")
   implicit val ec: ExecutionContextExecutor = system.dispatcher
 
@@ -26,8 +29,8 @@ object ProducerApp extends App {
   val producerSettings = ProducerSettings(producerConfig, new StringSerializer, new StringSerializer)
 
   val produce: Future[Done] =
-    Source(1 to 100)
-      .map(value => new ProducerRecord[String, String]("test", value.toString))
+    Source(logs)
+      .map(value => new ProducerRecord[String, String](config.getString("akka.kafka.topic"), value.toString))
       .runWith(Producer.plainSink(producerSettings))
 
   produce onComplete  {

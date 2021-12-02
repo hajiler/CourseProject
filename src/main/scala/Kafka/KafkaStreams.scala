@@ -50,53 +50,53 @@ object KafkaStreams {
     Serdes.fromFn[A](serializer, deserializer)
     }
 
-  def main(args: Array[String]): Unit = {
-//    // Topology
-//    val builder = new StreamsBuilder()
-//    import Topics._
+//  def main(args: Array[String]): Unit = {
+////    // Topology
+////    val builder = new StreamsBuilder()
+////    import Topics._
+////
+////    // KStream
+////    val usersOrderStream: KStream[UserId, Order] = builder.stream[UserId, Order](OrdersByUserTopic)
+////
+////    // KTable - distributed into partitions
+////    val userProfilesTable: KTable[UserId, Profile] = builder.table[UserId, Profile](DiscountProfilesByUserTopic)
+////
+////    // GlobalKTable - copied to all nodes in kafka cluster
+////    val discountProfilesGTable: GlobalKTable[Profile, Discount] = builder.globalTable[Profile, Discount](DiscountsTopic)
+////
+////    val expensiveOrders = usersOrderStream.filter {(userID, order) =>
+////      order.amount > 1000
+////    }
+////
+////    val listOfProducts =usersOrderStream.mapValues { order =>
+////      order.products
+////    }
+////
+////    val productsStream = usersOrderStream.flatMapValues(_.products)
+////
+////    // join
+////
+////    val ordersWithUserProfiles = usersOrderStream.join(userProfilesTable) { (order, profile) =>
+////      (order, profile)
+////    }
+////
+////    val topology = builder.build()
+////
+////    val props = new Properties()
+////    props.put(StreamsConfig.APPLICATION_ID_CONFIG, "orders-application")
+////    props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
+////    props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.stringSerde.getClass)
+////
+////    val application = new KafkaStreams(topology, props)
+////    application.start()
 //
-//    // KStream
-//    val usersOrderStream: KStream[UserId, Order] = builder.stream[UserId, Order](OrdersByUserTopic)
 //
-//    // KTable - distributed into partitions
-//    val userProfilesTable: KTable[UserId, Profile] = builder.table[UserId, Profile](DiscountProfilesByUserTopic)
+//    List("orders-by-user",
+//    "discount-profiles-by-user",
+//    "discounts",
+//    "orders",
+//    "payments",
+//    "paid-orders").foreach(topic => println(s"kafka-topics --bootstrap-server localhost:9092 --topic ${topic} --delete"))
 //
-//    // GlobalKTable - copied to all nodes in kafka cluster
-//    val discountProfilesGTable: GlobalKTable[Profile, Discount] = builder.globalTable[Profile, Discount](DiscountsTopic)
-//
-//    val expensiveOrders = usersOrderStream.filter {(userID, order) =>
-//      order.amount > 1000
-//    }
-//
-//    val listOfProducts =usersOrderStream.mapValues { order =>
-//      order.products
-//    }
-//
-//    val productsStream = usersOrderStream.flatMapValues(_.products)
-//
-//    // join
-//
-//    val ordersWithUserProfiles = usersOrderStream.join(userProfilesTable) { (order, profile) =>
-//      (order, profile)
-//    }
-//
-//    val topology = builder.build()
-//
-//    val props = new Properties()
-//    props.put(StreamsConfig.APPLICATION_ID_CONFIG, "orders-application")
-//    props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
-//    props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.stringSerde.getClass)
-//
-//    val application = new KafkaStreams(topology, props)
-//    application.start()
-
-
-    List("orders-by-user",
-    "discount-profiles-by-user",
-    "discounts",
-    "orders",
-    "payments",
-    "paid-orders").foreach(topic => println(s"kafka-topics --bootstrap-server localhost:9092 --topic ${topic} --delete"))
-
-  }
+//  }
 }

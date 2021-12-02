@@ -13,6 +13,7 @@ val apacheCommonIOVersion = "2.11.0"
 val scalacticVersion = "3.2.9"
 val generexVersion = "1.0.2"
 val AkkaVersion = "2.6.17"
+val SparkVersion = "3.2.0"
 
 libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-core" % logbackVersion,
@@ -36,8 +37,12 @@ libraryDependencies ++= Seq(
   "org.apache.kafka" %% "kafka-streams-scala" % "2.8.0",
   "io.circe" %% "circe-core" % "0.14.1",
   "io.circe" %% "circe-generic" % "0.14.1",
-  "io.circe" %% "circe-parser" % "0.14.1"
-//  "com.typesafe.akka" %% "akka-actor-testkit-typed" % AkkaVersion % Test,
+  "io.circe" %% "circe-parser" % "0.14.1",
+  "org.apache.spark" %% "spark-sql" % "3.2.0" % "provided",
+//  "org.apache.spark" %% "spark-core" % "3.2.0" % "provided",
+  "org.apache.spark" %% "spark-sql-kafka-0-10" % "3.2.0" % Test
+
+  //  "com.typesafe.akka" %% "akka-actor-testkit-typed" % AkkaVersion % Test,
 //  "com.typesafe.akka" %% "akka-remote" % AkkaVersion,
 //  "com.typesafe.akka" %% "akka-cluster-typed" % AkkaVersion,
 //  "com.typesafe.akka" %% "akka-stream-typed" % AkkaVersion,
@@ -49,6 +54,8 @@ libraryDependencies ++= Seq(
 )
 
 assembly / assemblyMergeStrategy := {
+  case "reference.conf" => MergeStrategy.concat
+  case "META-INF/services/org.apache.spark.sql.sources.DataSourceRegister" => MergeStrategy.concat
   case PathList("META-INF", xs @ _*) => MergeStrategy.discard
   case x => MergeStrategy.first
 }

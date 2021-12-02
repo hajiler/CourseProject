@@ -1,1 +1,1 @@
-["Akka.ActorHierarchyExperiments","Akka.AkkaQuickstart","Kafka.ConsumerApp","Kafka.KafkaStreams","Kafka.ProducerApp","Main"]
+["Kafka.ConsumerApp","Kafka.ProducerApp","Spark.SparkPlayGround"]
