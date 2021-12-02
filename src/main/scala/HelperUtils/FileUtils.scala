@@ -3,7 +3,7 @@ package HelperUtils
 import scala.io.Source
 
 object FileUtils {
-  def getLogsFromFileEvent(fileEvent: List[String]): String = {
+  def getLogsFromFileEvent(fileEvent: List[String]): List[String] = {
     val logs = fileEvent.flatMap(fileName => {
       try {
         val fileReader = Source.fromFile(fileName)
@@ -15,7 +15,7 @@ object FileUtils {
         case exception: Exception => List()
       }
     })
-      .reduce((files, file1) => files + file1)
+//      .reduce((files, file1) => files + file1)
     logs
   }
 }
