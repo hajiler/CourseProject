@@ -16,8 +16,9 @@ import scala.util.{Failure, Success}
 
 object ProducerApp extends App {
   val logs = List("16:28:44.370 [scala-execution-context-global-123] WARN  HelperUtils.Parameters$ - x2oBSI0%CdfV2%ChSsnZ7vJo=2qJqZ%.kbc!0ne`y&m",
-    "16:28:44.389 [scala-execution-context-global-123] ERROR HelperUtils.Parameters$ - ihu}!A2]*07}|,lc",
-    "16:28:44.406 [scala-execution-context-global-123] INFO  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?")
+    "16:28:44.389 [scala-execution-context-global-123] DEBUG HelperUtils.Parameters$ - ihu}!A2]*07}|,lc",
+    "16:28:44.389 [scala-execution-context-global-123] DEBUG HelperUtils.Parameters$ - ihu}!A2]*07}|,lc",
+    "16:28:44.406 [scala-execution-context-global-123] DEBUG  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?")
   implicit val system: ActorSystem = ActorSystem("producer-sys")
   implicit val ec: ExecutionContextExecutor = system.dispatcher
 
@@ -30,7 +31,7 @@ object ProducerApp extends App {
 
   val produce: Future[Done] =
     Source(logs)
-      .map(value => new ProducerRecord[String, String](config.getString("akka.kafka.topic"), value.toString))
+      .map(value => new ProducerRecord[String, String](config.getString("akka.kafka.topic"), value))
       .runWith(Producer.plainSink(producerSettings))
 
   produce onComplete  {

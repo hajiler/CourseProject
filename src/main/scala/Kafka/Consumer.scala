@@ -24,7 +24,7 @@ object ConsumerApp extends App {
   val consumerSettings = ConsumerSettings(consumerConfig, new StringDeserializer, new StringDeserializer)
 
   val consume = Consumer
-    .plainSource(consumerSettings, Subscriptions.topics(config.getString("akka.kafka.topic")))
+    .plainSource(consumerSettings, Subscriptions.topics(/*config.getString("akka.kafka.topic")*/ "results"))
     .runWith(
       Sink.foreach(record => println(s"Received log: ${record.value()}"))
     )

@@ -23,28 +23,28 @@ object SparkPlayGround {
 
     import spark.implicits._
 
+    // Subscribe to Kafka source for logs, and load them into a DataFrame
     val df = spark.readStream
       .format("kafka")
       .option("kafka.bootstrap.servers", "localhost:9092")
       .option("subscribe", config.getString("akka.kafka.topic"))
       .load()
     df
+      // Process the data frame to filter for desired logs
       .map(row => row.get(1).asInstanceOf[Array[Byte]])
       .map(bytes=> new String(bytes))
+    // Start query
       .writeStream
-      .foreachBatch( (data:Dataset[String], batch:Long) => {
-        logger.error("WHYTHAFUCK")
-        println(s"BATCH NUMBER $batch")
-        println(data.toString())
-        data.foreach(println)
-      })
-      .format("console")
+      // Write processed data to new Kafka topic
+      .format("kafka")
+      .option("kafka.bootstrap.servers", "localhost:9092")
+      .option("topic", /*config.getString("akka.kafka.topic")*/ "results")
+      .option("checkpointLocation", "/Users/hajiler/school/cs441/CourseProject/src/main/kafka/.checkpoint")
+    //      .format("console")
       .outputMode("append")
       .start()
+      // Wait for query to terminate
       .awaitTermination()
-
-
-    println("Spark executed some stuf")
   }
 }
 
