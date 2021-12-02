@@ -14,7 +14,7 @@ import org.apache.kafka.common.serialization.StringSerializer
 import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.util.{Failure, Success}
 
-object ProducerApp {
+object ProducerApp extends App {
   val logs = List("16:28:44.370 [scala-execution-context-global-123] WARN  HelperUtils.Parameters$ - x2oBSI0%CdfV2%ChSsnZ7vJo=2qJqZ%.kbc!0ne`y&m",
     "16:28:44.389 [scala-execution-context-global-123] ERROR HelperUtils.Parameters$ - ihu}!A2]*07}|,lc",
     "16:28:44.406 [scala-execution-context-global-123] INFO  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?")

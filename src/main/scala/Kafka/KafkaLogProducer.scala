@@ -11,9 +11,10 @@ import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.serialization.StringSerializer
 import org.slf4j.LoggerFactory
 
-import scala.concurrent.{ExecutionContextExecutor, Future}
+import scala.concurrent.{ExecutionContextExecutor}
 
-class LogProducer(actorSystem: ActorSystem) {
+class KafkaLogProducer(actorSystem: ActorSystem) {
+  // Create implicate objects for creating kafka source
   implicit val system: ActorSystem = actorSystem
   implicit val ec: ExecutionContextExecutor = system.dispatcher
 
@@ -22,14 +23,19 @@ class LogProducer(actorSystem: ActorSystem) {
     case None => throw new RuntimeException("Cannot obtain a reference to the config data.")
   }
 
-  private val logger = LoggerFactory.getLogger(ObtainConfigReference.getClass)
+  private val logger = LoggerFactory.getLogger(this.getClass)
 
+  // Create configs for Kafka source
   private val producerConfig = config.getConfig("akka.kafka.producer")
   private val producerSettings = ProducerSettings(producerConfig, new StringSerializer, new StringSerializer)
 
-  val produce: Future[Done] =
+  // Write logs to Kafka topic
+  def writeLogsToSpark(logs: String) = {
+    val topic = config.getString("akka.kafka.topic")
     Source(logs)
-      .map(value => new ProducerRecord[String, String](config.getString("akka.kafka.topic"), value.toString))
+      .map(value => new ProducerRecord[String, String](topic, logs))
       .runWith(Producer.plainSink(producerSettings))
 
+    logger.info(s"Kafka Log Producer writing logs to kafka topic: $topic")
+  }
 }

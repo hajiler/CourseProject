@@ -40,7 +40,6 @@ object SparkPlayGround {
       })
       .format("console")
       .outputMode("append")
-
       .start()
       .awaitTermination()
 
