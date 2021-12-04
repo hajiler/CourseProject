@@ -18,7 +18,14 @@ object ProducerApp extends App {
   val logs = List("16:28:44.370 [scala-execution-context-global-123] WARN  HelperUtils.Parameters$ - x2oBSI0%CdfV2%ChSsnZ7vJo=2qJqZ%.kbc!0ne`y&m",
     "16:28:44.389 [scala-execution-context-global-123] DEBUG HelperUtils.Parameters$ - ihu}!A2]*07}|,lc",
     "16:28:44.389 [scala-execution-context-global-123] DEBUG HelperUtils.Parameters$ - ihu}!A2]*07}|,lc",
-    "16:28:44.406 [scala-execution-context-global-123] DEBUG  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?")
+    "16:28:44.406 [scala-execution-context-global-123] DEBUG  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?",
+  "16:28:14.370 [scala-execution-context-global-123] WARN  HelperUtils.Parameters$ - x2oBSI0%CdfV2%ChSsnZ7vJo=2qJqZ%.kbc!0ne`y&m",
+  "16:28:20.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?1",
+  "16:28:44.389 [scala-execution-context-global-123] INFO HelperUtils.Parameters$ - ihu}!A2]*07}|,lc",
+  "16:28:44.389 [scala-execution-context-global-123] DEBUG HelperUtils.Parameters$ - ihu}!A2]*07}|,lc",
+  "16:28:34.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?2",
+  "16:28:38.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?3",
+  "16:29:44.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?4")
   implicit val system: ActorSystem = ActorSystem("producer-sys")
   implicit val ec: ExecutionContextExecutor = system.dispatcher
 

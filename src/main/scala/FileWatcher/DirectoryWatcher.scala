@@ -1,8 +1,8 @@
 package FileWatcher
 
-import java.nio.file.{FileSystems, Path, Paths, WatchKey, WatchService};
+import java.nio.file.{FileSystems, Path, Paths, WatchEvent, WatchKey, WatchService}
 import java.nio.file.StandardWatchEventKinds._
-import scala.jdk.CollectionConverters.CollectionHasAsScala
+import collection.JavaConverters
 
 class DirectoryWatcher {
   val watchService : WatchService = FileSystems.getDefault().newWatchService()
@@ -15,8 +15,8 @@ class DirectoryWatcher {
     while(watchKey.reset()) {
       val pollEvents = watchKey.pollEvents()
       if (!pollEvents.isEmpty) {
-        return pollEvents.asScala
-          .map(event => event.context().toString)
+        return pollEvents.toArray()
+          .map(event => event.asInstanceOf[WatchEvent[_]].context().toString)
           .toList
       }
     }

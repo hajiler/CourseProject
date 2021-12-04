@@ -4,7 +4,7 @@ package Spark
 import HelperUtils.ObtainConfigReference
 import org.apache.spark.sql.{DataFrame, Dataset, ForeachWriter, Row, SparkSession}
 import org.slf4j.LoggerFactory
-import scala.jdk.CollectionConverters.CollectionHasAsScala
+import HelperUtils.Utils.{extractErrorLogs, summarizeErrorLogs, summarizeErrorLogs2}
 
 object SparkPlayGround {
   val logger = LoggerFactory.getLogger(ObtainConfigReference.getClass)
@@ -29,19 +29,22 @@ object SparkPlayGround {
       .option("kafka.bootstrap.servers", "localhost:9092")
       .option("subscribe", config.getString("akka.kafka.topic"))
       .load()
-    df
+    val logsFromSource = df
       // Process the data frame to filter for desired logs
       .map(row => row.get(1).asInstanceOf[Array[Byte]])
       .map(bytes=> new String(bytes))
+
+    val errorLogs = extractErrorLogs(logsFromSource, spark)
+    val query = summarizeErrorLogs2(errorLogs, spark)
     // Start query
-      .writeStream
+      query.writeStream
       // Write processed data to new Kafka topic
       .format("kafka")
       .option("kafka.bootstrap.servers", "localhost:9092")
       .option("topic", /*config.getString("akka.kafka.topic")*/ "results")
       .option("checkpointLocation", "/Users/hajiler/school/cs441/CourseProject/src/main/kafka/.checkpoint")
     //      .format("console")
-      .outputMode("append")
+      .outputMode("update")
       .start()
       // Wait for query to terminate
       .awaitTermination()
