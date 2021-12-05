@@ -4,7 +4,7 @@ import org.apache.hadoop.io.{IntWritable, Text}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
-import HelperUtils.Utils.{extractErrorLogs, summarizeErrorLogs, summarizeErrorLogs2}
+import HelperUtils.Utils.{createEmailRequest, extractErrorLogs, getEmailBodyFromLogs, summarizeErrorLogs, summarizeErrorLogs2}
 import org.apache.hadoop.shaded.org.eclipse.jetty.websocket.common.frames.DataFrame
 
 import scala.collection.JavaConverters._
@@ -36,12 +36,36 @@ class UtilTests extends AnyFlatSpec with Matchers {
   }
 
   it should "Group logs in the same time bucket" in {
-    val df = spark.createDataset(logs)
-    val errorLogs = extractErrorLogs(df, spark)
-    val actual = summarizeErrorLogs(errorLogs, spark)
-    val expected = List("16:28:20.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?1",
-      "16:28:34.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?2 || 16:28:38.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?3",
-      "16:29:44.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?4")
-    summarizeErrorLogs2(errorLogs, spark)
+    val df = spark.createDataset(List(("16:28:2-29","16:28:20.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?1"),
+      ("16:28:3-39","16:28:34.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?2"),
+      ("16:28:3-39","16:28:38.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?3"),
+      ("16:29:4-49","16:29:44.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?4")))
+    val expected = List("16:29:4-49 ENDTIMEBUCKET 16:29:44.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?4",
+      "16:28:2-29 ENDTIMEBUCKET 16:28:20.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?1",
+      "16:28:3-39 ENDTIMEBUCKET 16:28:34.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?2 ENDLOG 16:28:38.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?3")
+    summarizeErrorLogs2(df, spark).collect()
+      .toList
+      .zip(expected)
+      .foreach(pair => pair._1 shouldBe pair._2)
+  }
+
+  it should "Create a correct HTML email body from log data" in {
+    val data = "16:28:3-39 ENDTIMEBUCKET 16:28:34.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?2 ENDLOG 16:28:38.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?3"
+    val actual = getEmailBodyFromLogs(data)
+    val expected = "<h3>2 ERROR logs at 16:28:3-39</h3><p>16:28:34.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?2</p><p>16:28:38.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?3</p>"
+    actual shouldBe expected
+  }
+
+  it should "Create the correct email request from log data" in {
+    val fromEmail = "erodri90@uic.edu"
+    val toEmail = "erodri90@uic.edu"
+    val subject = s"ERROR LOG UPDATE"
+    val data = "16:28:3-39 ENDTIMEBUCKET 16:28:34.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?2 ENDLOG 16:28:38.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?3"
+    val expectedMessage = "<h3>2 ERROR logs at 16:28:3-39</h3><p>16:28:34.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?2</p><p>16:28:38.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?3</p>"
+    val actual = createEmailRequest(data)
+    actual.getSource shouldBe fromEmail
+    actual.getDestination.getToAddresses.get(0) shouldBe toEmail
+    actual.getMessage.getSubject.getData shouldBe subject
+    actual.getMessage.getBody.getHtml.getData shouldBe expectedMessage
   }
 }
