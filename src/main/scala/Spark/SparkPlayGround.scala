@@ -26,8 +26,8 @@ object SparkPlayGround {
     // Subscribe to Kafka source for logs, and load them into a DataFrame
     val df = spark.readStream
       .format("kafka")
-      .option("kafka.bootstrap.servers", "localhost:9092")
-      .option("subscribe", config.getString("akka.kafka.topic"))
+      .option("kafka.bootstrap.servers", "b-2.demo-cluster-1.m021ne.c6.kafka.us-east-2.amazonaws.com:9092,b-3.demo-cluster-1.m021ne.c6.kafka.us-east-2.amazonaws.com:9092,b-1.demo-cluster-1.m021ne.c6.kafka.us-east-2.amazonaws.com:9092")
+      .option("subscribe", "logs")
       .load()
     val logsFromSource = df
       // Process the data frame to filter for desired logs
@@ -40,9 +40,9 @@ object SparkPlayGround {
       query.writeStream
       // Write processed data to new Kafka topic
       .format("kafka")
-      .option("kafka.bootstrap.servers", "localhost:9092")
+      .option("kafka.bootstrap.servers", "b-2.demo-cluster-1.m021ne.c6.kafka.us-east-2.amazonaws.com:9092,b-3.demo-cluster-1.m021ne.c6.kafka.us-east-2.amazonaws.com:9092,b-1.demo-cluster-1.m021ne.c6.kafka.us-east-2.amazonaws.com:9092")
       .option("topic", /*config.getString("akka.kafka.topic")*/ "results")
-      .option("checkpointLocation", "/Users/hajiler/school/cs441/CourseProject/src/main/kafka/.checkpoint")
+      .option("checkpointLocation", "/home/ec2-user/exec/kafka-checkpoints")
     //      .format("console")
       .outputMode("update")
       .start()

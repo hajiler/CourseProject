@@ -30,7 +30,7 @@ class KafkaLogProducer(actorSystem: ActorSystem) {
   private val producerSettings = ProducerSettings(producerConfig, new StringSerializer, new StringSerializer)
 
   // Write logs to Kafka topic
-  def writeLogsToSpark(logs: List[String]) = {
+  def writeLogsToKafka(logs: List[String]) = {
     val topic = config.getString("akka.kafka.topic")
     Source(logs)
       .map(value => new ProducerRecord[String, String](topic, value))

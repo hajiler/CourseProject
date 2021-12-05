@@ -1,5 +1,5 @@
 package Akka
-import FileWatcher.DirectoryWatcher
+import FileWatcher.{DirectoryWatcher, s3Handler, NioWatcher}
 import Kafka.KafkaLogProducer
 import akka.actor.typed.ActorRef
 import akka.actor.typed.ActorSystem
@@ -15,7 +15,7 @@ object LogActors {
   // LogHandler Actor.
   def apply(): Behavior[LogWatcher] = Behaviors.receive { (context, message) =>
     context.log.info(s"Watching ${message.directory}")
-    val watcher = new DirectoryWatcher()
+    val watcher: DirectoryWatcher = new NioWatcher()
     val changedFiles = watcher.startWatch()
     message.sendTo ! LogHandler(changedFiles, context.self)
     Behaviors.same
@@ -31,7 +31,7 @@ object LogBot {
       val logs = getLogsFromFileEvent(message.fileEvents)
       // Write logs to kafka topic
       val logProducer = new KafkaLogProducer(context.system.classicSystem)
-      logProducer.writeLogsToSpark(logs)
+      logProducer.writeLogsToKafka(logs)
       // Message original LogWatcher actor to continue directory watch
       message.from ! LogActors.LogWatcher("fakedirectory", context.self)
       Behaviors.same

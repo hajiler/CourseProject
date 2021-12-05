@@ -4,7 +4,7 @@ import org.apache.hadoop.io.{IntWritable, Text}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
-import HelperUtils.Utils.{createEmailRequest, extractErrorLogs, getEmailBodyFromLogs, summarizeErrorLogs, summarizeErrorLogs2}
+import HelperUtils.Utils.{createEmailRequest, extractErrorLogs, getEmailBodyFromLogs, getLogsFromFileEvent, summarizeErrorLogs, summarizeErrorLogs2}
 import org.apache.hadoop.shaded.org.eclipse.jetty.websocket.common.frames.DataFrame
 
 import scala.collection.JavaConverters._
@@ -24,6 +24,13 @@ class UtilTests extends AnyFlatSpec with Matchers {
   "16:28:34.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?2",
   "16:28:38.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?3",
   "16:29:44.406 [scala-execution-context-global-123] ERROR  HelperUtils.Parameters$ - CC]>~R#,^#0JWyESarZdETDcvk)Yk'I?4")
+
+  it should "Read correct logs from a list of events" in {
+    val actual = getLogsFromFileEvent(List("testLogFile.txt"))
+    actual
+      .zip(logs)
+      .foreach(pair => pair._1 shouldBe pair._2)
+  }
 
   it should "Filter out a set of Logs for only ERROR logs in a time bucket" in {
     val df = spark.createDataset(logs)

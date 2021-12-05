@@ -4,22 +4,7 @@ import java.nio.file.{FileSystems, Path, Paths, WatchEvent, WatchKey, WatchServi
 import java.nio.file.StandardWatchEventKinds._
 import collection.JavaConverters
 
-class DirectoryWatcher {
-  val watchService : WatchService = FileSystems.getDefault().newWatchService()
-  val path : Path = Paths.get("/Users/hajiler/school/cs441/CourseProject")
-  path.register(watchService, ENTRY_CREATE, ENTRY_MODIFY)
-  val watchKey : WatchKey = watchService.take()
+trait DirectoryWatcher {
+  def startWatch(): List[String]
 
-  def startWatch() : List[String] = {
-    print(s"Watching path ${path.getParent}")
-    while(watchKey.reset()) {
-      val pollEvents = watchKey.pollEvents()
-      if (!pollEvents.isEmpty) {
-        return pollEvents.toArray()
-          .map(event => event.asInstanceOf[WatchEvent[_]].context().toString)
-          .toList
-      }
-    }
-    List[String]()
-  }
 }

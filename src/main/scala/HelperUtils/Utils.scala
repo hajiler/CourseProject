@@ -4,7 +4,6 @@ import org.apache.spark.sql.functions.{col, collect_list, lit}
 
 import scala.io.Source
 import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
-import com.amazonaws.services.simpleemail.{AmazonSimpleEmailService, AmazonSimpleEmailServiceClientBuilder}
 import com.amazonaws.services.simpleemail.model.{Body, Message, Content, Destination, SendEmailRequest}
 import scala.collection.mutable
 
