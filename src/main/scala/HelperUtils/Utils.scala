@@ -1,26 +1,37 @@
 package HelperUtils
 
-import org.apache.spark.sql.functions.{col, collect_list, lit}
+import org.apache.spark.sql.functions.{col, collect_list}
 
 import scala.io.Source
-import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
+import org.apache.spark.sql.{Dataset, SparkSession}
 import com.amazonaws.services.simpleemail.model.{Body, Message, Content, Destination, SendEmailRequest}
-import scala.collection.mutable
 
 object Utils {
   def getLogsFromFileEvent(fileEvent: List[String]): List[String] = {
-    val logs = fileEvent.flatMap(fileName => {
-      try {
-        val fileReader = Source.fromFile(fileName)
-        val lines = fileReader.getLines
-          .toList
-        fileReader.close()
-        lines
-      } catch {
-        case exception: Exception => List()
-      }
+    val config = ObtainConfigReference("akka") match {
+      case Some(value) => value
+      case None => throw new RuntimeException("Cannot obtain a reference to the config data.")
+    }
+    val logs = fileEvent
+      // Map the event to a file path
+      .map(config.getString("akka.kafka.dirToWatch") + "/" + _)
+      // Flat map all paths to a list of logs from all files
+      .flatMap(path => {
+        println(s"Watching path ${path}")
+        try {
+          // Open the file
+          val fileReader = Source.fromFile(path)
+          // Read the file
+          val lines = fileReader.getLines
+            .toList
+          // Close the file
+          fileReader.close()
+          lines
+        } catch {
+          case exception: Exception => List()
+        }
     })
-//      .reduce((files, file1) => files + file1)
+
     logs
   }
 
@@ -32,6 +43,7 @@ object Utils {
     interval
   }
 
+  // Tranform incoming log data into a data frame containing the time interval for ERROR logs and the ERROR log itself
   def extractErrorLogs(data: Dataset[String], spark: SparkSession) : Dataset[(String, String)] = {
     import spark.implicits._
     data.map(_.split(" "))
@@ -43,27 +55,15 @@ object Utils {
       })
   }
 
-  def summarizeErrorLogs(data: Dataset[(String, String)], spark: SparkSession) : Dataset[String] = {
-    val a : mutable.Map[String, String] = mutable.Map()
-    import spark.implicits._
-    data.printSchema()
-    data
-      .collect()
-      .foreach(value => {
-        val timeBucket = value._1
-        val log = value._2
-        val newValue = a.getOrElse(timeBucket, "") + " ENDLOG " + log
-        a += (timeBucket -> newValue)
-      })
-    val values = a.values.toSeq
 
-    spark.createDataset(values)
-  }
-
-  def summarizeErrorLogs2(data: Dataset[(String, String)], spark: SparkSession): Dataset[String]  = {
+  // Transform incoming data containing (TimeInterval, Log) into (TimeInterval, List of logs in that time Interval)
+  def summarizeErrorLogs(data: Dataset[(String, String)], spark: SparkSession): Dataset[String]  = {
     import spark.implicits._
+    // Group logs by time interval
     data.groupBy(col("_1"))
+      // Aggregate logs in each time interval into a list
       .agg(collect_list("_2"))
+      // Map each row of (TimeInterval, Log) into a specifically formatted string for parsing
       .map(row => {
         val bucket = row.getString(0)
         val logs = row.getList(1).toArray()
@@ -72,11 +72,15 @@ object Utils {
       })
   }
 
+  // Create and AWS email request from incoming data (in the format returned by the above). These are hardcoded
+  // to my email because they should not be configured in any other way.
   def createEmailRequest(data: String): SendEmailRequest = {
     val fromEmail = "erodri90@uic.edu"
     val toEmail = "erodri90@uic.edu"
-    val subject = s"ERROR LOG UPDATE"
+    val subject = "ERROR LOG UPDATE"
+    // Create html body as a string (see below function)
     val htmlBody = getEmailBodyFromLogs(data)
+    // Create email request
     new SendEmailRequest()
       .withDestination(
         new Destination()
@@ -90,6 +94,7 @@ object Utils {
       .withSource(fromEmail)
   }
 
+  // Format email from data
   def getEmailBodyFromLogs(data: String): String = {
     val parsedData = data.split(" ENDTIMEBUCKET ")
     val bucket = parsedData(0)

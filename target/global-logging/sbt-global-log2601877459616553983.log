@@ -1,0 +1,19 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(test, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / test[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /Users/hajiler/school/cs441/CourseProject/target/scala-2.12/test-classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0mdone compiling[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mUtilTests:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mMap Reduce functions[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should Read correct logs from a list of events[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should Filter out a set of Logs for only ERROR logs in a time bucket[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should Group logs in the same time bucket[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should Create a correct HTML email body from log data[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should Create the correct email request from log data[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 14 seconds, 503 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 5[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 5, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 22 s, completed Dec 5, 2021 6:23:24 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(idea-shell, None, None)[0m

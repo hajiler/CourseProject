@@ -1,5 +1,5 @@
 package Akka
-import FileWatcher.{DirectoryWatcher, s3Handler, NioWatcher}
+import FileWatcher.NioWatcher
 import Kafka.KafkaLogProducer
 import akka.actor.typed.ActorRef
 import akka.actor.typed.ActorSystem
@@ -15,8 +15,10 @@ object LogActors {
   // LogHandler Actor.
   def apply(): Behavior[LogWatcher] = Behaviors.receive { (context, message) =>
     context.log.info(s"Watching ${message.directory}")
-    val watcher: DirectoryWatcher = new NioWatcher()
+    // Watch directory.
+    val watcher = new NioWatcher()
     val changedFiles = watcher.startWatch()
+    // Send file events to LogHandler actor.
     message.sendTo ! LogHandler(changedFiles, context.self)
     Behaviors.same
   }
@@ -28,17 +30,19 @@ object LogBot {
   def apply(): Behavior[LogActors.LogHandler] = {
     Behaviors.receive { (context, message) =>
       context.log.info(s"Reading logs from: ${message.fileEvents}")
+      // Read files from file events/
       val logs = getLogsFromFileEvent(message.fileEvents)
       // Write logs to kafka topic
       val logProducer = new KafkaLogProducer(context.system.classicSystem)
       logProducer.writeLogsToKafka(logs)
       // Message original LogWatcher actor to continue directory watch
-      message.from ! LogActors.LogWatcher("fakedirectory", context.self)
+      message.from ! LogActors.LogWatcher("LogDirectory", context.self)
       Behaviors.same
     }
   }
 }
 
+// Default behavior of actor system. Spawn log watcher actor.
 object LogSystem {
   final case class WatchDirectory(path: String)
 
@@ -50,7 +54,7 @@ object LogSystem {
       Behaviors.receiveMessage { message =>
         val sendTo = context.spawn(LogBot(), message.path)
 
-        watcher ! LogActors.LogWatcher("fakepath", sendTo)
+        watcher ! LogActors.LogWatcher("LogDirectory", sendTo)
         Behaviors.same
       }
     }

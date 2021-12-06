@@ -2,10 +2,9 @@ import akka.actor.typed.ActorSystem
 import Akka._
 import Kafka.KafkaLogProducer
 object Main extends App {
-//  val watch = new DirectoryWatcher()
-//  watch.startWatch()
-//  val logWatcher: ActorSystem[LogActors] = ActorSystem
-  val logMain : ActorSystem[LogSystem.WatchDirectory] = ActorSystem(LogSystem(), "Testing")
+  // Create actor system
+  val logMain : ActorSystem[LogSystem.WatchDirectory] = ActorSystem(LogSystem(), "LogSystem")
 
-  logMain ! LogSystem.WatchDirectory("fakePathFromMain")
+  // Start actor system behavior
+  logMain ! LogSystem.WatchDirectory("Logs")
 }

@@ -1,7 +1,6 @@
 package Kafka
 
 import HelperUtils.ObtainConfigReference
-import Kafka.ProducerApp.{config, logs}
 import akka.Done
 import akka.actor.ActorSystem
 import akka.kafka.ProducerSettings
@@ -32,10 +31,11 @@ class KafkaLogProducer(actorSystem: ActorSystem) {
   // Write logs to Kafka topic
   def writeLogsToKafka(logs: List[String]) = {
     val topic = config.getString("akka.kafka.topic")
+    logger.info(s"Kafka Log Producer writing $logs to kafka topic: $topic")
     Source(logs)
-      .map(value => new ProducerRecord[String, String](topic, value))
+      .map(value => {
+        new ProducerRecord[String, String](topic, value)
+      })
       .runWith(Producer.plainSink(producerSettings))
-
-    logger.info(s"Kafka Log Producer writing logs to kafka topic: $topic")
   }
 }

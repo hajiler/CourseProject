@@ -4,7 +4,7 @@ name := "CourseProject"
 
 version := "0.1"
 
-scalaVersion := "2.13.6"
+scalaVersion := "2.12.10"
 
 val logbackVersion = "1.3.0-alpha10"
 val sfl4sVersion = "2.0.0-alpha5"
@@ -19,6 +19,7 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-core" % logbackVersion,
   "ch.qos.logback" % "logback-classic" % logbackVersion,
   "org.slf4j" % "slf4j-api" % sfl4sVersion,
+  "org.slf4j" % "slf4j-jdk14" % "2.0.0-alpha5",
   "com.typesafe" % "config" % typesafeConfigVersion,
   "commons-io" % "commons-io" % apacheCommonIOVersion,
   "org.scalactic" %% "scalactic" % scalacticVersion,
@@ -28,6 +29,7 @@ libraryDependencies ++= Seq(
   "com.github.mifmif" % "generex" % generexVersion,
   "com.amazonaws" % "aws-lambda-java-core" % "1.0.0",
   "com.amazonaws" % "aws-java-sdk-s3" % "1.12.99",
+  "com.amazonaws" % "aws-java-sdk-ses" % "1.12.125",
   "com.typesafe.akka" %% "akka-actor-typed" % AkkaVersion,
   "com.typesafe.akka" %% "akka-protobuf-v3" % AkkaVersion,
   "com.typesafe.akka" %% "akka-stream" % AkkaVersion,

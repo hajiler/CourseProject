@@ -2,10 +2,11 @@ package Spark
 
 
 import HelperUtils.ObtainConfigReference
-import org.apache.spark.sql.{DataFrame, Dataset, ForeachWriter, Row, SparkSession}
+import org.apache.spark.sql.{SparkSession}
 import org.slf4j.LoggerFactory
-import HelperUtils.Utils.{extractErrorLogs, summarizeErrorLogs, summarizeErrorLogs2}
+import HelperUtils.Utils.{extractErrorLogs, summarizeErrorLogs}
 
+// Class to submit to spark
 object SparkPlayGround {
   val logger = LoggerFactory.getLogger(ObtainConfigReference.getClass)
   val config = ObtainConfigReference("akka") match {
@@ -14,36 +15,41 @@ object SparkPlayGround {
   }
 
   def main(args: Array[String]) {
+    // Create spark session
     val spark = SparkSession
       .builder
       .appName("StructuredNetworkWordCount")
       .config("spark.master", "local")
       .getOrCreate()
+    // Hide unnesscary errors
     spark.sparkContext.setLogLevel("ERROR")
 
+    // Import implicits from spark session for transformations
     import spark.implicits._
 
     // Subscribe to Kafka source for logs, and load them into a DataFrame
     val df = spark.readStream
       .format("kafka")
-      .option("kafka.bootstrap.servers", "b-2.demo-cluster-1.m021ne.c6.kafka.us-east-2.amazonaws.com:9092,b-3.demo-cluster-1.m021ne.c6.kafka.us-east-2.amazonaws.com:9092,b-1.demo-cluster-1.m021ne.c6.kafka.us-east-2.amazonaws.com:9092")
-      .option("subscribe", "logs")
+      .option("kafka.bootstrap.servers", config.getString("akka.kafka.kafka-servers"))
+      .option("subscribe", config.getString("akka.kafka.topic"))
       .load()
+
+    // Transform incoming data from bytes to strings
     val logsFromSource = df
-      // Process the data frame to filter for desired logs
       .map(row => row.get(1).asInstanceOf[Array[Byte]])
       .map(bytes=> new String(bytes))
 
+    // Transform data to just just desired error logs
     val errorLogs = extractErrorLogs(logsFromSource, spark)
-    val query = summarizeErrorLogs2(errorLogs, spark)
+    // Group error logs by time bucket
+    val query = summarizeErrorLogs(errorLogs, spark)
     // Start query
       query.writeStream
-      // Write processed data to new Kafka topic
+      // Write processed data to new Kafka topic, where the emails will be sent
       .format("kafka")
-      .option("kafka.bootstrap.servers", "b-2.demo-cluster-1.m021ne.c6.kafka.us-east-2.amazonaws.com:9092,b-3.demo-cluster-1.m021ne.c6.kafka.us-east-2.amazonaws.com:9092,b-1.demo-cluster-1.m021ne.c6.kafka.us-east-2.amazonaws.com:9092")
-      .option("topic", /*config.getString("akka.kafka.topic")*/ "results")
-      .option("checkpointLocation", "/home/ec2-user/exec/kafka-checkpoints")
-    //      .format("console")
+      .option("kafka.bootstrap.servers", config.getString("akka.kafka.kafka-servers"))
+      .option("topic", config.getString("akka.kafka.outputTopic"))
+      .option("checkpointLocation", config.getString("akka.kafka.checkPointPath"))
       .outputMode("update")
       .start()
       // Wait for query to terminate

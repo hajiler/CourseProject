@@ -1,0 +1,288 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 4 Scala sources to /Users/hajiler/school/cs441/CourseProject/target/scala-2.12/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/Generation/LogSimulator.scala:12:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mTuple2[RandomStringGenerator, String], maxCount: Long = 0) = (new LogMsgSimulator(initstate)).ProduceLogMessage(initstate, maxCount)[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/Generation/RSGStateMachine.scala:25:8: '(' expected but identifier found.[0m
+[0m[[0m[31merror[0m] [0m[0m    if len <= 0 then inp else constructString(inp+rg.nextPrintableChar, len - 1)[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/Generation/RSGStateMachine.scala:27:3: illegal start of simple expression[0m
+[0m[[0m[31merror[0m] [0m[0m  def  next: Tuple2[RandomStringGenerator, String] =[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/Generation/RSGStateMachine.scala:29:94: '(' expected but identifier found.[0m
+[0m[[0m[31merror[0m] [0m[0m    val patternString = constructString(rg.nextPrintableChar().toString, length/2).concat(if rg.nextFloat() < Parameters.patternFrequency then generex.random() else "")[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/Generation/RSGStateMachine.scala:32:1: illegal start of simple expression[0m
+[0m[[0m[31merror[0m] [0m[0m}[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/CreateLogger.scala:12:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mdef apply[T](class4Logger: Class[T]):Logger =[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/CreateLogger.scala:14:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    val logger = LoggerFactory.getLogger(class4Logger)[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/CreateLogger.scala:15:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    Try(getClass.getClassLoader.getResourceAsStream(LOGBACKXML)) match {[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/CreateLogger.scala:19:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    logger[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/CreateLogger.scala:24:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    val logger = LoggerFactory.getLogger(class4Logger)[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/CreateLogger.scala:25:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    Try(getClass.getClassLoader.getResourceAsStream(LOGBACKXML)) match {[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/CreateLogger.scala:29:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    logger[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:3:9: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0mprivate val logger = CreateLogger(classOf[Parameters.type])[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:4:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val config = ObtainConfigReference("randomLogGenerator") match {[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:11:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  type ConfigType2Process[T] = T match[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:13:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    case Long => Long[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:14:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    case String => String[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:15:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    case Double => Double[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:16:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    case Tuple2[Double, Double] => Tuple2[Double, Double][0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:19:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private val COMPARETHREASHOLD = 0.00001d[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:20:20: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  implicit private val comp: Ordering[Double] = new Ordering[Double] {[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:27:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private def logMsgRange(logTypeName: String): Tuple2[Double, Double] =[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:33:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    if lst.length != 2 then throw new IllegalArgumentException(s"Incorrect range of values is specified for log $logTypeName")[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:34:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    (lst(0), lst(1))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:35:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  end logMsgRange[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:39:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private def func4Parameter[T](defaultVal: T, f: String => T): String => T =[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:45:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  end func4Parameter[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:49:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private def getParam[T](pName: String, defaultVal: T): ConfigType2Process[T] =[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:57:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  end getParam[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:61:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private val MINSTRINGLENGTH = 10[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:62:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private val minStrLen = getParam("MinString", MINSTRINGLENGTH)[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:66:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val minStringLength: Int = if minStrLen < MINSTRINGLENGTH then[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:67:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    logger.warn(s"Min string length is set to $MINSTRINGLENGTH")[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:68:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    MINSTRINGLENGTH[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:70:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val maxStringLength = getParam("MaxString", 50)[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:71:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val minSymbol = getParam("MinSymbol", 32)[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:72:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val maxSymbol = getParam("MaxSymbol", 126)[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:73:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val generatingPattern = getParam("Pattern", "([a-c][e-g][0-3]|[A-Z][5-9][f-w]){5,15}")[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:74:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val patternFrequency = getParam("Frequency", 0.05d)[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:75:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val randomSeed = getParam("Seed", System.currentTimeMillis())[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:76:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val timePeriod = getParam("TimePeriod", 1000)[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:77:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val maxCount = getParam("MaxCount", 0)[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:78:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val runDurationInMinutes: Duration = if Parameters.maxCount > 0 then Duration.Inf else getParam("DurationMinutes", 0).minutes[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:80:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  if Parameters.maxCount > 0 then logger.warn(s"Max count ${Parameters.maxCount} is used to create records instead of timeouts")[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:81:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  if timePeriod < 0 then throw new IllegalArgumentException("Timer period cannot be less than zero")[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:89:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private def checkForNestedRanges(input: ListMap[Tuple2[Double, Double], _]): Boolean =[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:95:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    if overlaps.toList.length > 0 then[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:96:7: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m      logger.error(s"Ranges of likelihoods overlap: $overlaps")[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:97:7: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m      true[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:100:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  end checkForNestedRanges[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:102:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private val compFunc: (Tuple2[Double, Double], Tuple2[Double, Double]) => Boolean = (input1, input2) => (input1._1 <= input2._1) && (input1._2 < input2._2)[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:103:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val logRanges = ListMap(Map[Tuple2[Double, Double], String => Unit]([0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:109:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  if checkForNestedRanges(logRanges) then throw new Exception("Overrlapping likelihood ranges will lead to the loss of precision.")[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:113:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val config = ObtainConfigReference("randomLogGenerator") match {[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:120:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  type ConfigType2Process[T] = T match[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:122:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    case Long => Long[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:123:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    case String => String[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:124:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    case Double => Double[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:125:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    case Tuple2[Double, Double] => Tuple2[Double, Double][0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:128:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private val COMPARETHREASHOLD = 0.00001d[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:129:20: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  implicit private val comp: Ordering[Double] = new Ordering[Double] {[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:136:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private def logMsgRange(logTypeName: String): Tuple2[Double, Double] =[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:142:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    if lst.length != 2 then throw new IllegalArgumentException(s"Incorrect range of values is specified for log $logTypeName")[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:143:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    (lst(0), lst(1))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:144:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  end logMsgRange[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:148:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private def func4Parameter[T](defaultVal: T, f: String => T): String => T =[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:154:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  end func4Parameter[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:158:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private def getParam[T](pName: String, defaultVal: T): ConfigType2Process[T] =[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:166:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  end getParam[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:170:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private val MINSTRINGLENGTH = 10[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:171:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private val minStrLen = getParam("MinString", MINSTRINGLENGTH)[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:175:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val minStringLength: Int = if minStrLen < MINSTRINGLENGTH then[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:176:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    logger.warn(s"Min string length is set to $MINSTRINGLENGTH")[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:177:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    MINSTRINGLENGTH[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:179:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val maxStringLength = getParam("MaxString", 50)[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:180:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val minSymbol = getParam("MinSymbol", 32)[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:181:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val maxSymbol = getParam("MaxSymbol", 126)[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:182:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val generatingPattern = getParam("Pattern", "([a-c][e-g][0-3]|[A-Z][5-9][f-w]){5,15}")[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:183:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val patternFrequency = getParam("Frequency", 0.05d)[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:184:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val randomSeed = getParam("Seed", System.currentTimeMillis())[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:185:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val timePeriod = getParam("TimePeriod", 1000)[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:186:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val maxCount = getParam("MaxCount", 0)[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:187:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val runDurationInMinutes: Duration = if Parameters.maxCount > 0 then Duration.Inf else getParam("DurationMinutes", 0).minutes[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:189:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  if Parameters.maxCount > 0 then logger.warn(s"Max count ${Parameters.maxCount} is used to create records instead of timeouts")[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:190:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  if timePeriod < 0 then throw new IllegalArgumentException("Timer period cannot be less than zero")[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:198:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private def checkForNestedRanges(input: ListMap[Tuple2[Double, Double], _]): Boolean =[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:204:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    if overlaps.toList.length > 0 then[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:205:7: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m      logger.error(s"Ranges of likelihoods overlap: $overlaps")[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:206:7: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m      true[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:209:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  end checkForNestedRanges[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:211:11: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m  private val compFunc: (Tuple2[Double, Double], Tuple2[Double, Double]) => Boolean = (input1, input2) => (input1._1 <= input2._1) && (input1._2 < input2._2)[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:212:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  val logRanges = ListMap(Map[Tuple2[Double, Double], String => Unit]([0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/hajiler/school/cs441/CourseProject/src/main/scala/HelperUtils/Parameters.scala:218:3: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m  if checkForNestedRanges(logRanges) then throw new Exception("Overrlapping likelihood ranges will lead to the loss of precision.")[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m93 errors found[0m
+[0m[[0m[0mdebug[0m] [0m[0mForcing garbage collection...[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 2 s, completed Dec 5, 2021 6:17:34 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(idea-shell, None, None)[0m
